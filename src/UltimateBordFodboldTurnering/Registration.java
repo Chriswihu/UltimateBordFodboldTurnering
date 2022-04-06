@@ -7,12 +7,11 @@ import java.util.Scanner;
 public class Registration {
     static ArrayList<String> teamName = new ArrayList<>();
     static ArrayList<String> matchResult = new ArrayList<>();
-    private String name;
-    static ArrayList<String> club = new ArrayList<String>();
+
 
     public static void teamRegistrations() throws IOException {
         FileWriter out;
-        out = new FileWriter("src/UltimateBordFodboldTurnering/hold.txt", true);
+        out = new FileWriter("src/UltimateBordFodboldTurnering/spillere.txt", true);
         Scanner sc;
         sc = new Scanner(System.in);
         while (teamName.size() <= 4) {
@@ -21,8 +20,6 @@ public class Registration {
         }
         System.out.print(teamName + "\n");
         out.write(teamName + "\n");
-        club.add(0, String.valueOf(teamName));
-        System.out.println(club);
         out.close();
     }
 
@@ -52,18 +49,22 @@ public class Registration {
         out.close();
     }
 
-    public static void addTeams() throws IOException {
+    public static void addTeams() throws IOException
+    {
+        System.out.println("Indtast venligst navnet på det første hold:");
         FileWriter out;
         out = new FileWriter("src/UltimateBordFodboldTurnering/hold.txt", true);
         Scanner sc;
         sc = new Scanner(System.in);
         String input;
-        while (club.size() <= 8) {
-            System.out.println("Indtast venligst navnene på holdene:");
-            club.add(sc.next());
+
+        int lineNum = 9;
+        for (int i = 0; i < lineNum; i++)
+        {
+            input = sc.nextLine();
+            out.write(input + "\n");
+            System.out.println("Indtast venligst navnet på det næste hold:");
         }
-        System.out.print(club);
-        out.write(club + "\n");
         out.close();
     }
 }
