@@ -24,36 +24,52 @@ public class Match {
         sc = new Scanner(System.in);
 
         while (kamp1.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille første indledende kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille første indledende kamp (uden mellemrum):");
             kamp1.add(sc.next());
         }
             System.out.print(kamp1 + "\n");
             out.write(kamp1 + "\n");
             System.out.println("Skal spille første indledende kamp. \n");
+            System.out.println("Indtast venligst dato på hvornår den første indledende kamp skal spilles (med bindestreg):");
+            kamp1.add(sc.next());
+            out.write(kamp1 + "\n");
+            System.out.println(kamp1 + "\n");
 
         while (kamp2.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille næste indledende kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille næste indledende kamp (uden mellemrum):");
             kamp2.add(sc.next());
         }
         out.write(kamp2 + "\n");
         System.out.print(kamp2 + "\n");
         System.out.println("Skal spille anden indledende kamp. \n");
+        System.out.println("Indtast venligst dato på hvornår den anden indledende kamp skal spilles (med bindestreg):");
+        kamp2.add(sc.next());
+        out.write(kamp2 + "\n");
+        System.out.println(kamp2 + "\n");
 
         while (kamp3.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille tredje indledende kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille tredje indledende kamp (uden mellemrum):");
             kamp3.add(sc.next());
         }
         out.write(kamp3 + "\n");
         System.out.print(kamp3 + "\n");
         System.out.println("Skal spille tredje indledende kamp. \n");
+        System.out.println("Indtast venligst dato på hvornår den tredje indledende kamp skal spilles (med bindestreg):");
+        kamp3.add(sc.next());
+        out.write(kamp3 + "\n");
+        System.out.println(kamp3 + "\n");
 
         while (kamp4.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille fjerde indledende kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille fjerde indledende kamp (uden mellemrum):");
             kamp4.add(sc.next());
         }
         out.write(kamp4 + "\n");
         System.out.print(kamp4 + "\n");
         System.out.println("Skal spille fjerde indledende kamp. \n");
+        System.out.println("Indtast venligst dato på hvornår den fjerde indledende kamp skal spilles (med bindestreg):");
+        kamp4.add(sc.next());
+        out.write(kamp4 + "\n");
+        System.out.println(kamp4 + "\n");
 
         System.out.println("Sådan skal de fire indledende kampe spilles. Held og lykke! \n");
         out.close();
@@ -66,20 +82,29 @@ public class Match {
         sc = new Scanner(System.in);
 
         while (semifinale1.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille første semi-finale kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille første semi-finale kamp (uden mellemrum):");
             semifinale1.add(sc.next());
         }
         System.out.print(semifinale1 + "\n");
         out.write(semifinale1 + "\n");
         System.out.println("Dette er den første semi finale kamp. \n");
+        System.out.println("Indtast venligst dato på hvornår den første semi finale kampen skal spilles (med bindestreg):");
+        semifinale1.add(sc.next());
+        out.write(semifinale1 + "\n");
+        System.out.println(semifinale1 + "\n");
+
         while (semifinale2.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de hold der skal spille næste semi-finale kamp:");
+            System.out.println("Indtast venligst navnene på de hold der skal spille næste semi-finale kamp (uden mellemrum):");
             semifinale2.add(sc.next());
         }
         System.out.print(semifinale2 + "\n");
         out.write(semifinale2 + "\n");
         System.out.println("Dette er den anden semi finale kamp. \n");
 
+        System.out.println("Indtast venligst dato på hvornår den anden semi finale kampen skal spilles (med bindestreg):");
+        semifinale2.add(sc.next());
+        out.write(semifinale2 + "\n");
+        System.out.println(semifinale2 + "\n");
         System.out.println("Sådan skal de to semi-finale kampe spilles. Held og lykke! \n");
         out.close();
     }
@@ -90,12 +115,12 @@ public class Match {
         sc = new Scanner(System.in);
 
         while (finale.size() <= 1) {
-            System.out.println("Indtast venligst navnene på de to hold der skal spille finale kamp:");
+            System.out.println("Indtast venligst navnene på de to hold der skal spille finale kamp (uden mellemrum):");
             finale.add(sc.next());
         }
         System.out.print(finale + "\n");
 
-        System.out.println("Indtast venligst dato på hvornår finale kampen skal spilles:");
+        System.out.println("Indtast venligst dato på hvornår finale kampen skal spilles (med bindestreg):");
         finale.add(sc.next());
         out.write(finale + "\n");
         System.out.println(finale + "\n");
