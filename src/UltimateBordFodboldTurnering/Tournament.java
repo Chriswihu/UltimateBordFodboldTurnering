@@ -75,6 +75,7 @@ public class Tournament {
                     }
                 }
 
+
                 switch (input2) {
                     case "4" -> {
                         Registration.addTeams();
@@ -85,14 +86,13 @@ public class Tournament {
 
             if (input.equals("2")) {
                 System.out.println("Tast 1 for at se spillere på hvert hold\n" +
-                        "Tast 2 for at se kampresultater\n" + "Tast 3 for at se planlagte kampe. \n" + "Tast 4 for at se holdnavne. \n" + "Tast 5 for at se planlagte kampe. \n" + "Tryk Q for at gå tilbage. \n");
+                        "Tast 2 for at se kampresultater\n" + "Tast 3 for at se planlagte kampe. \n" + "Tast 4 for at se holdnavne. \n" + "Tryk Q for at gå tilbage. \n");
 
                 String input3;
                 input3 = scanner.nextLine();
 
                 switch (input3) {
                     case "Q":
-                        System.out.println("Tak for denne gang");
 
                         break;
                 }
@@ -101,7 +101,6 @@ public class Tournament {
                     case "1" -> {
                         FileIO fileIO = new FileIO();
                         fileIO.getTeamPlayers();
-                        //Team.getIndividualTeams();
                         break;
                     }
                 }
@@ -124,26 +123,6 @@ public class Tournament {
                         FileIO fileIO = new FileIO();
                         fileIO.getTeamNames();
                         break;
-                    }
-                }
-                switch (input3) {
-                    case "5" -> {
-                        System.out.println("Tast 1 for at se de indledende kampe\n" +
-                                "Tast 2 for se semifinale kampe\nTast 3 for at finalen\n" + "Tryk Q for at gå tilbage. \n");
-                        String input4;
-                        input4 = scanner.nextLine();
-                        switch (input4) {
-                            case "1":
-                                break;
-                        }
-                        switch (input4) {
-                            case "2":
-                                break;
-                        }
-                        switch (input4) {
-                            case "3":
-                                break;
-                        }
                     }
                 }
             }
