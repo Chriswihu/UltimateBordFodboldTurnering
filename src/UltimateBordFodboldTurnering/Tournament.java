@@ -22,8 +22,8 @@ public class Tournament {
 
 
             if (input.equals("1")) {
-                System.out.println("Tast 1 for at tilføje spillere til holdene\n" +
-                        "Tast 2 for at registrere kampresultatet\nTast 3 for at planlægge kampe\n" + "Tast 4 for at oprette 8 hold til turneringen. \n" + "Tryk Q for at gå tilbage. \n");
+                System.out.println("Tast 1 for at oprette 8 hold til turneringen. \n" +
+                        "Tast 2 for at tilføje spillerne til de 8 hold\nTast 3 for at planlægge kampe\n" + "Tast 4 for at registrere resultater. \n" + "Tryk Q for at gå tilbage. \n");
 
                 String input2;
                 input2 = scanner.nextLine();
@@ -38,14 +38,14 @@ public class Tournament {
 
                 switch (input2) {
                     case "1" -> {
-                        Registration.teamRegistrations();
+                        Registration.addTeams();
                         break;
                     }
                 }
 
                 switch (input2) {
                     case "2" -> {
-                        Registration.registerResult();
+                        Registration.teamRegistrations();
                         break;
                     }
                 }
@@ -78,15 +78,15 @@ public class Tournament {
 
                 switch (input2) {
                     case "4" -> {
-                        Registration.addTeams();
+                        Registration.saveResult();
                         break;
                     }
                 }
             }
 
             if (input.equals("2")) {
-                System.out.println("Tast 1 for at se spillere på hvert hold\n" +
-                        "Tast 2 for at se kampresultater\n" + "Tast 3 for at se planlagte kampe. \n" + "Tast 4 for at se holdnavne. \n" + "Tryk Q for at gå tilbage. \n");
+                System.out.println("Tast 1 for at se holdnavne\n" +
+                        "Tast 2 for at se spillerne på et hold\n" + "Tast 3 for at se planlagte kampe. \n" + "Tast 4 for at se resultater. \n" + "Tryk Q for at gå tilbage. \n");
 
                 String input3;
                 input3 = scanner.nextLine();
@@ -100,28 +100,29 @@ public class Tournament {
                 switch (input3) {
                     case "1" -> {
                         FileIO fileIO = new FileIO();
-                        fileIO.getTeamPlayers();
+                        fileIO.getTeamNames();
                         break;
                     }
                 }
 
                 switch (input3) {
                     case "2" -> {
-                        Match.getMatchResults();
+                        FileIO fileIO = new FileIO();
+                        fileIO.getTeamPlayers();
                         break;
                     }
                 }
 
                 switch (input3) {
                     case "3" -> {
-                        Match.getScheduledMatches();
+                        FileIO fileIO = new FileIO();
+                        fileIO.getScheduledMatches();
                         break;
                     }
                 }
                 switch (input3) {
                     case "4" -> {
-                        FileIO fileIO = new FileIO();
-                        fileIO.getTeamNames();
+                        //fileIO.getTeamNames();
                         break;
                     }
                 }

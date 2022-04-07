@@ -8,9 +8,9 @@ public class Team extends Registration
     private int semiScore = 0;
     private int finalScore = 0;
 
-    public Team(String teamName, int init, int semi, int fin, int sum)
+    public Team(String team, int init, int semi, int fin, int sum)
     {
-        this.name = teamName;
+        this.name = team;
         this.initScore = init;
         this.semiScore = semi;
         this.finalScore = fin;
@@ -43,7 +43,7 @@ public class Team extends Registration
 
     @Override
     public String toString() {
-        return teamName + ", " + initScore + ", " + semiScore + ", " + finalScore + ", " + sumPoints;
+        return name + ", " + initScore + ", " + semiScore + ", " + finalScore + ", " + sumPoints;
     }
 
     public int updateInit(int matchScore)

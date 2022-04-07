@@ -1,6 +1,7 @@
 package UltimateBordFodboldTurnering;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -269,4 +270,119 @@ public class FileIO implements IO
     @Override
     public void getTeamScores() {
     }
-}
+
+    @Override
+    public void getScheduledMatches() throws IOException {
+        System.out.println("Vælg hvilken kamp du vil se datoen på og hvilke hold der skal spille mod hinanden" +
+                "  (Hvis kampen er blevet spillet, vil du også " +
+                "kunne se resultatet: \n" +
+                "Tast 1 for 1. indledende kamp\n" +
+                "Tast 2 for 2. indledende kamp\n" +
+                "Tast 3 for 3. indledende kamp\n" +
+                "Tast 4 for 4. indledende kamp\n" +
+                "Tast 5 for 1. semifinale kamp\n" +
+                "Tast 6 for 2. semifinale kamp\n" +
+                "Tast 7 for finale kampen\n");
+        Scanner sc;
+        sc = new Scanner(System.in);
+        String input;
+        input = sc.nextLine();
+
+        switch (input) {
+            case "1":
+                System.out.println("Disse hold skal spille den 1. indledende kamp:");
+
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 1; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+        }
+
+        switch (input)
+        {
+            case "2":
+                System.out.println("Disse hold skal spille den 2. indledende kamp:");
+
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 2; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+
+        switch (input)
+        {
+            case "3":
+                System.out.println("Disse hold skal spille den 3. indledende kamp:");
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 3; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+
+        switch (input)
+        {
+            case "4":
+                System.out.println("Disse hold skal spille den 4. indledende kamp:");
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 4; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+
+        switch (input)
+        {
+            case "5":
+                System.out.println("Disse hold skal spille den 1. semifinale kamp:");
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 5; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+
+        switch (input)
+        {
+            case "6":
+                System.out.println("Disse hold skal spille den 2. indledende kamp:");
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 6; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+
+        switch (input)
+        {
+            case "7":
+                System.out.println("Disse hold skal spille finale kampen:");
+                FileReader fr = new FileReader("src/UltimateBordFodboldTurnering/planlagteKampe.txt");
+                BufferedReader br = new BufferedReader(fr);
+                int lineNum = 7; //line of file to read
+                for (int i = 1; i < lineNum; i++)
+                    br.readLine();
+                System.out.println(br.readLine() + "\n");
+
+                break;
+        }
+    }
+    }
