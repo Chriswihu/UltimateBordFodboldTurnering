@@ -1,0 +1,46 @@
+@startuml
+
+!pragma layout smetana
+
+object BordFodboldTurnering
+object Registrering
+object Hold
+object Placering
+object Vinderhold
+object Kampe
+object Spillere
+object Taberhold
+object Turneringsleder
+object Tilmelding
+object Skole
+object System
+object Studerende
+object Knockout
+object SemiFinaleKamp
+object FinaleKamp
+object StartOgSlutTidspunkt
+object Målscore
+object KampResultat
+
+Hold <|-- Vinderhold
+Hold <|-- Taberhold
+Hold <|-- Placering
+Kampe <|-- Knockout
+Kampe <|-- StartOgSlutTidspunkt
+Kampe <|-- Målscore
+Knockout <|-- SemiFinaleKamp
+Knockout <|-- FinaleKamp
+Målscore <|-- KampResultat
+
+System *-- BordFodboldTurnering
+BordFodboldTurnering *-- Registrering
+BordFodboldTurnering *-- Kampe
+BordFodboldTurnering *-- Spillere
+Tilmelding *-- Skole
+Skole *-- Studerende
+Studerende *-- Spillere
+Studerende *-- Registrering
+Registrering *-- Hold
+Kampe *-- Hold
+
+@enduml

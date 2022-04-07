@@ -1,0 +1,69 @@
+@startuml
+
+!pragma layout smetana
+
+class Main
+{
+static main(String[] args)
+}
+
+class TournamentSystem
+{
+    +runTournament()
+}
+
+class Tournament
+{
+    -String tournamentDescription;
+    -int tournamentDateStart;
+    -int tournamentDateEnd;
+
+    +createTournament()
+}
+
+class TextUI
+{
++ ArrayList<String> getPlayerNames()
+}
+
+class Team
+{
+    +ArrayList<String> players
++ ArrayList<String> getPlayer()
+}
+
+class Registration
+{
+    -String nameOfTeam;
+    -String[] nameOfPlayers;
+
+    +receiveRegistrations()
+}
+
+class Match
+{
+    -int matchGoalScores;
+    - int registerResult
+    - int tournamentGoalScore;
+
+    +addTeams()
+    +scheduleMatches()
+    +recordMatchResults()
+}
+
+interface FileIO
+{
+    +inputData()
+    +readResult()
+    +readData()
+    +saveData()
+}
+TournamentSystem *-- TextUI: has-a
+TextUI *-- Team: has-a
+TournamentSystem *-- Tournament: has-a
+TournamentSystem *-- FileIO: has-a
+Main *-- TournamentSystem: has-a
+TextUI *-- Registration
+TournamentSystem *-- "7"Match
+
+@enduml
