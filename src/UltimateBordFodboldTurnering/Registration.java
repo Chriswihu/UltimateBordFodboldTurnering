@@ -67,4 +67,19 @@ public class Registration {
         }
         out.close();
     }
+
+    public static void saveResult(ArrayList<Team> teams) {
+        String data = "name, Initial goals, Semi goals, Final goals, Sum of Points \n";
+        for (Team t : teams) {
+            data += t.getName() + ", " + t.getInitScore() + ", " + t.getSemiScore() + ", " + t.getFinalScore() + ", " + t.getSumPoints() + "\n";
+        }
+        try {
+            FileWriter output = new FileWriter("src/UltimateBordFodboldTurnering/kampResultat.txt");
+            output.write(data);
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
