@@ -128,8 +128,19 @@ public class DatabaseIO implements IO{
         }
     }
 
-    public void addExistingPlayerToTeam(Connection c)
-    {
+    public void addExistingPlayerToTeam(Connection c) {
+        try {
+        String cityQuery = "INSERT INTO team_player(playerID, teamID) VALUES (?, ?)";
+            PreparedStatement query = c.prepareStatement(cityQuery);
+            query.setInt(1, 42);
+            query.setInt(2, 20);
+
+            int result = query.executeUpdate();
+
+            query.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
