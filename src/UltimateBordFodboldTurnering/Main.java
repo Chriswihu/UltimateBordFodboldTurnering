@@ -22,7 +22,7 @@ public class Main {
             w.getTeamPlayers(c);
             w.findPlayerPartialInput(c);
             w.findTeamPartialInput(c);
-            //w.insertTable(c);
+            //w.addPlayer(c);
         }catch (SQLException e) {
             e.printStackTrace();
         }
