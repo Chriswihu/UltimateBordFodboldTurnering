@@ -93,7 +93,7 @@ public class DatabaseIO implements IO{
         }
     }
 
-    /*public void addPlayer(Connection c){
+    public void addPlayer(Connection c){
         String cityQuery = "INSERT INTO player (name) VALUES (?)";
 
         try
@@ -110,7 +110,7 @@ public class DatabaseIO implements IO{
 
 
 
-    }*/
+    }
 
     public void deletePlayer(Connection c){
         String cityQuery = "DELETE FROM player WHERE name = ?";
@@ -126,8 +126,10 @@ public class DatabaseIO implements IO{
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void addExistingPlayerToTeam(Connection c)
+    {
 
     }
 
