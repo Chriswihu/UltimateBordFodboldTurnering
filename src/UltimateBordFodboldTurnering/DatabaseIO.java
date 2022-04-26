@@ -32,7 +32,7 @@ public class DatabaseIO implements IO{
         try {
             String cityQuery = "SELECT * FROM player WHERE name = ?";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "Cristiano");
+            query.setString(1, "Iris");
             ResultSet result = query.executeQuery();
 
             while (result.next()) {
@@ -111,6 +111,25 @@ public class DatabaseIO implements IO{
 
 
     }*/
+
+    public void deletePlayer(Connection c){
+        String cityQuery = "DELETE FROM player WHERE name = ?";
+
+        try
+        {
+            PreparedStatement query = c.prepareStatement(cityQuery);
+            query.setString(1, "Cristiano");
+
+            int result = query.executeUpdate();
+
+            query.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
 
 
 

@@ -23,6 +23,7 @@ public class Main {
             w.findPlayerPartialInput(c);
             w.findTeamPartialInput(c);
             //w.addPlayer(c);
+            w.deletePlayer(c);
         }catch (SQLException e) {
             e.printStackTrace();
         }
