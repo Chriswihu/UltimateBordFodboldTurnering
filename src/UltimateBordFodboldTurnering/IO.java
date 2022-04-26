@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public interface IO {
 
     void getTeamNames(Connection c) throws IOException;
-
     void getTeamPlayers(Connection c) throws IOException;
-    public void findPlayerPartialInput(Connection c);
+    void findPlayerPartialInput(Connection c);
+    void findTeamPartialInput(Connection c);
 
     public void getTeamScores();
 

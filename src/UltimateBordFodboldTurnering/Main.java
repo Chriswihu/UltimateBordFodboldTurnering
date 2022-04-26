@@ -21,6 +21,7 @@ public class Main {
             w.getTeamNames(c);
             w.getTeamPlayers(c);
             w.findPlayerPartialInput(c);
+            w.findTeamPartialInput(c);
             //w.insertTable(c);
         }catch (SQLException e) {
             e.printStackTrace();

@@ -56,9 +56,9 @@ public class DatabaseIO implements IO{
 
     public void findPlayerPartialInput(Connection c) {
         try {
-            String cityQuery = "SELECT * FROM team WHERE name LIKE '%?%'";
+            String cityQuery = "SELECT * FROM player WHERE name LIKE ?";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "ull");
+            query.setString(1, "%lek%");
             ResultSet result = query.executeQuery();
 
             while (result.next()) {
@@ -75,6 +75,26 @@ public class DatabaseIO implements IO{
     public void getScheduledMatches() throws IOException {
 
     }
+
+    public void findTeamPartialInput(Connection c) {
+        try {
+            String cityQuery = "SELECT * FROM team WHERE name LIKE ?";
+            PreparedStatement query = c.prepareStatement(cityQuery);
+            query.setString(1, "%ull%");
+            ResultSet result = query.executeQuery();
+
+            while (result.next()) {
+                System.out.println("Name: " + result.getString("name"));
+            }
+
+            query.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
    /* @Override
     public String[] loadTeamData() {
