@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO implements IO
+public class FileIO
 {
-    @Override
+   /*@Override
     public void getTeamNames() throws IOException {
         System.out.println("Vælg hvilket hold du vil se navnet på\n" +
                 "Tast 1 for hold 1\n" +
@@ -385,4 +386,14 @@ public class FileIO implements IO
                 break;
         }
     }
+    /*
+    @Override
+    public String[] loadTeamData() {
+        return new String[0];
     }
+
+    @Override
+    public ArrayList<String> loadPlayerData() {
+        return null;
+    }*/
+}

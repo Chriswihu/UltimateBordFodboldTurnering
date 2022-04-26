@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Tournament {
-    public static void runTournament() throws IOException {
+    /*public static void runTournament() throws IOException {
         String input;
         Scanner scanner;
         scanner = new Scanner(System.in);
@@ -128,5 +128,6 @@ public class Tournament {
                 }
             }
         }
-    }
+    }*/
+
 }
