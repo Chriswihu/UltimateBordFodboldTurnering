@@ -1,133 +1,117 @@
 package UltimateBordFodboldTurnering;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
-public class Tournament {
-    /*public static void runTournament() throws IOException {
-        String input;
+public class Tournament
+{
+    public void runTournament() throws SQLException
+    {
+        Connection c;
+        DBinfo d = new DBinfo();
+        c = DriverManager.getConnection(d.getJdbcUrl(), d.getUsername(), d.getPassword());
         Scanner scanner;
         scanner = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("Velkommen til bordfodboldturneringen\nTast 1 for at oprette ny turnering. \n" +
-                    "Tast 2 for at se igangværende turnering. \n" +
-                    "Tryk Q for at quitte. \n");
+        String userInput;
+        int playerID;
+        int teamID;
+
+        while (true)
+        {
+            System.out.println("\n" +
+                    "Velkommen til menuen for bordfodboldturneringen\n" +
+                    "Tast 1 for at søge efter et hold ved at skrive dele af holdnavnet. \n" +
+                    "Tast 2 for at søge efter en spiller ved at skrive dele af spillerens navn. \n" +
+                    "Tast 3 for at tilføj en spiller til et hold. \n" +
+                    "Tast 4 for at fjerne en spiller fra et hold. \n" +
+                    "Tast 5 for at se de 8 hold rangeret efter antal point. \n" +
+                    "Tast 6 for at spillerne på et vilkårligt hold. \n" +
+                    "Tryk Q for at afslutte. \n");
+            String input;
             input = scanner.nextLine();
 
-            if (input.equals("Q")) {
-                System.out.println("Tak for denne gang");
-                break;
-            }
+            switch (input)
+            {
+                case "Q", "q" ->
+                        {
+                            System.out.println("Du har valgt at afslutte programmet.");
+                            System.out.println("Tak for denne gang.");
+                            System.exit(0);
 
-
-            if (input.equals("1")) {
-                System.out.println("Tast 1 for at oprette 8 hold til turneringen. \n" +
-                        "Tast 2 for at tilføje spillerne til de 8 hold\nTast 3 for at planlægge kampe\n" + "Tast 4 for at registrere resultater. \n" + "Tryk Q for at gå tilbage. \n");
-
-                String input2;
-                input2 = scanner.nextLine();
-
-                switch (input2) {
-
-                    case "Q":
-                        System.out.println("Tak for denne gang");
-
-                        break;
-                }
-
-                switch (input2) {
-                    case "1" -> {
-                        Registration.addTeams();
-                        break;
-                    }
-                }
-
-                switch (input2) {
-                    case "2" -> {
-                        Registration.teamRegistrations();
-                        break;
-                    }
-                }
-
-                switch (input2) {
-                    case "3" -> {
-                        System.out.println("Tast 1 for at planlægge de indledende kampe\n" +
-                                "Tast 2 for at planlægge semifinale kampe\nTast 3 for at planlægge finalen\n" + "Tryk Q for at gå tilbage. \n");
-                        String input5;
-                        input5 = scanner.nextLine();
-                        switch (input5) {
-                            case "1":
-                                Match.schedulePreliminaryMatch();
-                                break;
                         }
-                        switch (input5) {
-                            case "2":
-                                Match.scheduleSemiFinalMatch();
-                                break;
+
+                case "1" ->
+                        {
+                            System.out.println("Indtast navnet eller dele af navnet på det hold, du vil finde\n");
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            userInput = scanner.nextLine();
+                            databaseIO.findTeamPartialInput(c, userInput);
                         }
-                        switch (input5) {
-                            case "3":
-                                Match.scheduleFinalMatch();
-                                break;
+
+                case "2" ->
+                        {
+                            System.out.println("Indtast navnet eller dele af navnet på den spiller, du vil finde\n");
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            userInput = scanner.nextLine();
+                            databaseIO.findPlayerPartialInput(c, userInput);
                         }
-                        break;
-                    }
-                }
 
 
-                switch (input2) {
-                    case "4" -> {
-                        Registration.saveResult();
-                        break;
-                    }
-                }
-            }
+                case "3" ->
+                        {
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            System.out.println("Her er spillernes ID:\n");
+                            databaseIO.showAllPLayerID(c);
+                            System.out.println("\nHer er holdenes ID:\n");
+                            databaseIO.showAllTeamID(c);
 
-            if (input.equals("2")) {
-                System.out.println("Tast 1 for at se holdnavne\n" +
-                        "Tast 2 for at se spillerne på et hold\n" + "Tast 3 for at se planlagte kampe. \n" + "Tast 4 for at se resultater. \n" + "Tryk Q for at gå tilbage. \n");
+                            System.out.println("\nTilføj en spiller til et hold (Skriv spillerens ID).");
+                            playerID = Integer.parseInt(scanner.nextLine());
 
-                String input3;
-                input3 = scanner.nextLine();
+                            System.out.println("Tilføj spilleren til et hold (Skriv holdets ID).");
+                            teamID = Integer.parseInt(scanner.nextLine());
 
-                switch (input3) {
-                    case "Q":
+                            databaseIO.addExistingPlayerToTeam(c, playerID, teamID);
 
-                        break;
-                }
+                            System.out.println("Spiller " + playerID + " er nu tilføjet til hold " + teamID);
+                        }
 
-                switch (input3) {
-                    case "1" -> {
-                        FileIO fileIO = new FileIO();
-                        fileIO.getTeamNames();
-                        break;
-                    }
-                }
+                case "4" ->
+                        {
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            databaseIO.showAllPLayerID(c);
+                            System.out.println("\nFjern en spiller fra et hold ved at indtaste spillerens ID.");
 
-                switch (input3) {
-                    case "2" -> {
-                        FileIO fileIO = new FileIO();
-                        fileIO.getTeamPlayers();
-                        break;
-                    }
-                }
+                            playerID = Integer.parseInt(scanner.nextLine());
 
-                switch (input3) {
-                    case "3" -> {
-                        FileIO fileIO = new FileIO();
-                        fileIO.getScheduledMatches();
-                        break;
-                    }
-                }
-                switch (input3) {
-                    case "4" -> {
-                        //fileIO.getTeamNames();
-                        break;
-                    }
-                }
+                            databaseIO.deleteExistingPlayerFromTeam(c, playerID);
+
+                            System.out.println("Spiller " + playerID + " blev succesfuldt fjernet fra sit hold");
+                        }
+
+                case "5" ->
+                        {
+                            System.out.println("Her er de 8 hold rangeret efter antal point:");
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            databaseIO.getTop8Teams(c);
+                        }
+                case "6" ->
+                        {
+                            System.out.println("Indtast TeamID for det hold, du vil se spillerne på:\n");
+                            DatabaseIO databaseIO = new DatabaseIO();
+                            databaseIO.showAllTeamID(c);
+                            teamID = Integer.parseInt(scanner.nextLine());
+                            System.out.println("Her er spillerne på hold " + teamID + ":" + "\n");
+                            databaseIO.showAllPlayersInTeam(c, teamID);
+                        }
+                default ->
+                        {
+                            System.out.println("Ikke godtaget indput, prøv igen!");
+                        }
             }
         }
-    }*/
-
+    }
 }

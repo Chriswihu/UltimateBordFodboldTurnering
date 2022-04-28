@@ -1,159 +1,221 @@
 package UltimateBordFodboldTurnering;
 
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.Scanner;
 
-public class DatabaseIO implements IO{
-    @Override
-    public void getTeamNames(Connection c) throws IOException {
-        try {
-            String cityQuery = "SELECT * FROM team WHERE name = ?";
+public class DatabaseIO implements IO
+{
+    public void findPlayerPartialInput(Connection c, String userInput)
+    {
+        try
+        {
+            String cityQuery = "SELECT * FROM player WHERE name LIKE ?";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "Los Angeles");
-            ResultSet result = query.executeQuery();
+            query.setString(1, "%"+userInput+"%");
 
-            while (result.next()) {
-                System.out.println("Name: " + result.getString("name"));
+            ResultSet result = query.executeQuery();
+            System.out.println("Spillere fundet som indeholder: " + userInput);
+            while (result.next())
+            {
+                System.out.println("Navn: " + result.getString("name"));
+                int id = result.getInt("id");
+
+                CheckForExistingTeam(c, id);
+            }
+            query.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void CheckForExistingTeam(Connection c, int playerID)
+    {
+        Scanner scanner;
+        scanner = new Scanner(System.in);
+        int teamID;
+
+        String query = "SELECT * FROM team_player WHERE playerID = ?";
+
+        try
+        {
+            PreparedStatement preparedStatement = c.prepareStatement(query);
+
+            preparedStatement.setInt(1, playerID);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            while (result.next())
+            {
+                if (result.getInt("teamID") != 0)
+                {
+                    System.out.println("\nDer er ingen hold tilknyttet denne spiller.\nVælg et af de følgende hold:\n");
+                    showAllTeamID(c);
+                    System.out.println("\nIndtast hold ID");
+                    teamID = Integer.parseInt(scanner.nextLine());
+                    addExistingPlayerToTeam(c, playerID, teamID);
+                    System.out.println("Spilleren er nu tilknyttet hold " + teamID + ".");
+                } else
+                {
+                    System.out.println("Spilleren er allerede tilknyttet et hold");
+                    System.out.println("Hold ID: " + result.getInt("teamID"));
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void findTeamPartialInput(Connection c, String userInput)
+    {
+        try
+        {
+            String cityQuery = "SELECT * FROM team WHERE name LIKE ?";
+            PreparedStatement query = c.prepareStatement(cityQuery);
+            query.setString(1, "%"+userInput+"%");
+
+            ResultSet result = query.executeQuery();
+            System.out.println("Hold fundet som indeholder: " + userInput);
+            while (result.next())
+            {
+                System.out.println("Navn: " + result.getString("name"));
+            }
+
+            query.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void addExistingPlayerToTeam(Connection c, int playerID, int teamID)
+    {
+        try
+        {
+            String Query = "UPDATE team_player SET teamID = ? WHERE playerID = ?";
+            PreparedStatement query = c.prepareStatement(Query);
+            query.setInt(1, teamID);
+            query.setInt(2, playerID);
+
+            query.executeUpdate();
+
+            query.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteExistingPlayerFromTeam(Connection c, int playerID)
+    {
+        try
+        {
+            String cityQuery = "DELETE FROM team_player WHERE playerID = ?";
+            PreparedStatement query = c.prepareStatement(cityQuery);
+            query.setInt(1, playerID);
+
+            int result = query.executeUpdate();
+
+            query.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void getTop8Teams(Connection c)
+    {
+        try
+        {
+            String cityQuery = "SELECT * FROM team ORDER BY points DESC";
+            PreparedStatement query = c.prepareStatement(cityQuery);
+
+            ResultSet result = query.executeQuery();
+            while (result.next())
+            {
+                System.out.println("Holdnavn: " + result.getString("name"));
                 System.out.println("Points: " + result.getString("points"));
             }
 
             query.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }
 
-
-    @Override
-    public void getTeamPlayers(Connection c) throws IOException {
-        try {
-            String cityQuery = "SELECT * FROM player WHERE name = ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "Iris");
-            ResultSet result = query.executeQuery();
-
-            while (result.next()) {
-                System.out.println("Name: " + result.getString("name"));
-                //System.out.println("Points: " + result.getString("points"));
-            }
-
-            query.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void getTeamScores() {
-
-    }
-
-
-
-    public void findPlayerPartialInput(Connection c) {
-        try {
-            String cityQuery = "SELECT * FROM player WHERE name LIKE ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "%lek%");
-            ResultSet result = query.executeQuery();
-
-            while (result.next()) {
-                System.out.println("Name: " + result.getString("name"));
-            }
-
-            query.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void getScheduledMatches() throws IOException {
-
-    }
-
-    public void findTeamPartialInput(Connection c) {
-        try {
-            String cityQuery = "SELECT * FROM team WHERE name LIKE ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "%ull%");
-            ResultSet result = query.executeQuery();
-
-            while (result.next()) {
-                System.out.println("Name: " + result.getString("name"));
-            }
-
-            query.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addPlayer(Connection c){
-        String cityQuery = "INSERT INTO player (name) VALUES (?)";
-
+    public void showAllPLayerID(Connection c)
+    {
         try
         {
+            String cityQuery = "SELECT * FROM player ORDER BY id ASC";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "Cristiano");
 
-            int result = query.executeUpdate();
+            ResultSet result = query.executeQuery();
+            while (result.next())
+            {
+                System.out.print("ID: " + result.getString("id"));
+                System.out.println(" Navn: " + result.getString("name"));
+            }
 
             query.close();
-        }catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
-
-
-
     }
 
-    public void deletePlayer(Connection c){
-        String cityQuery = "DELETE FROM player WHERE name = ?";
-
+    public void showAllTeamID(Connection c)
+    {
         try
         {
+            String cityQuery = "SELECT * FROM team ORDER BY id ASC";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setString(1, "Cristiano");
 
-            int result = query.executeUpdate();
+            ResultSet result = query.executeQuery();
+            while (result.next())
+            {
+                System.out.print("ID: " + result.getString("id"));
+                System.out.println(" Navn: " + result.getString("name"));
+            }
 
             query.close();
-        }catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void addExistingPlayerToTeam(Connection c) {
-        try {
-        String cityQuery = "INSERT INTO team_player(playerID, teamID) VALUES (?, ?)";
+    public void showAllPlayersInTeam(Connection c, int teamID)
+    {
+        try
+        {
+            String cityQuery = "SELECT * FROM team_player WHERE teamID = ?";
             PreparedStatement query = c.prepareStatement(cityQuery);
-            query.setInt(1, 42);
-            query.setInt(2, 20);
+            query.setInt(1, teamID);
 
-            int result = query.executeUpdate();
-
+            ResultSet result = query.executeQuery();
+            while (result.next())
+            {
+                System.out.println("Player ID: " + result.getString("playerID"));
+            }
             query.close();
-        }catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
-
     }
-
-
-
-
-   /* @Override
-    public String[] loadTeamData() {
-        return new String[0];
-    }
-
-    @Override
-    public ArrayList<String> loadPlayerData() {
-        return null;
-    }*/
 }

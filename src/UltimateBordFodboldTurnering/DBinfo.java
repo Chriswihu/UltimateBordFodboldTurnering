@@ -7,9 +7,9 @@ public class DBinfo
     private String password;
 
     public DBinfo() {
-        this.JdbcUrl = "jdbc:mysql://localhost/systemTournament?" + "autoReconnect=true&useSSL=false";
+        this.JdbcUrl = "jdbc:mysql://localhost/systemtournament?" + "autoReconnect=true&useSSL=false";
         this.username = "root";
-        this.password = "Jasamlegenda7@";
+        this.password = "Ysr5123mqr";
     }
 
     public String getJdbcUrl()
