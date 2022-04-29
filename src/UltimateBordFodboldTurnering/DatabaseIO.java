@@ -12,8 +12,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM player WHERE name LIKE ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM player WHERE name LIKE ?";
+            PreparedStatement query = c.prepareStatement(Query);
             query.setString(1, "%"+userInput+"%");
 
             ResultSet result = query.executeQuery();
@@ -38,12 +38,11 @@ public class DatabaseIO implements IO
         Scanner scanner;
         scanner = new Scanner(System.in);
         int teamID;
-
-        String query = "SELECT * FROM team_player WHERE playerID = ?";
+        String Query = "SELECT * FROM team_player WHERE playerID = ?";
 
         try
         {
-            PreparedStatement preparedStatement = c.prepareStatement(query);
+            PreparedStatement preparedStatement = c.prepareStatement(Query);
 
             preparedStatement.setInt(1, playerID);
 
@@ -76,8 +75,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM team WHERE name LIKE ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM team WHERE name LIKE ?";
+            PreparedStatement query = c.prepareStatement(Query);
             query.setString(1, "%"+userInput+"%");
 
             ResultSet result = query.executeQuery();
@@ -118,8 +117,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "DELETE FROM team_player WHERE playerID = ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "DELETE FROM team_player WHERE playerID = ?";
+            PreparedStatement query = c.prepareStatement(Query);
             query.setInt(1, playerID);
 
             int result = query.executeUpdate();
@@ -136,8 +135,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM team ORDER BY points DESC";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM team ORDER BY points DESC";
+            PreparedStatement query = c.prepareStatement(Query);
 
             ResultSet result = query.executeQuery();
             while (result.next())
@@ -158,8 +157,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM player ORDER BY id ASC";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM player ORDER BY id ASC";
+            PreparedStatement query = c.prepareStatement(Query);
 
             ResultSet result = query.executeQuery();
             while (result.next())
@@ -180,8 +179,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM team ORDER BY id ASC";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM team ORDER BY id ASC";
+            PreparedStatement query = c.prepareStatement(Query);
 
             ResultSet result = query.executeQuery();
             while (result.next())
@@ -202,8 +201,8 @@ public class DatabaseIO implements IO
     {
         try
         {
-            String cityQuery = "SELECT * FROM team_player WHERE teamID = ?";
-            PreparedStatement query = c.prepareStatement(cityQuery);
+            String Query = "SELECT * FROM team_player WHERE teamID = ?";
+            PreparedStatement query = c.prepareStatement(Query);
             query.setInt(1, teamID);
 
             ResultSet result = query.executeQuery();
